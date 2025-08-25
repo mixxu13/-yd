@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moja Muzyczna Strona</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    audio {
+      width: 90%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Witaj na mojej stronie!</h1>
+<p>Muzyka powinna zacząć grać automatycznie lub po pierwszym dotknięciu ekranu.</p>
+
+<audio id="music" autoplay loop controls>
+  <source src="muzyka.mp3" type="audio/mpeg">
+  Twoja przeglądarka nie obsługuje odtwarzacza audio.
+</audio>
+
+<script>
+  const audio = document.getElementById('music');
+
+  // Próba odciszenia i autoodtwarzania
+  function tryPlayAudio() {
+    audio.muted = false;
+    audio.play().catch(() => {
+      console.log("Autoodtwarzanie zostało zablokowane przez przeglądarkę.");
+    });
+  }
+
+  // Małe opóźnienie dla niektórych przeglądarek mobilnych
+  setTimeout(tryPlayAudio, 500);
+
+  // Uruchomienie po interakcji użytkownika (dotyk/klik)
+  window.addEventListener('click', tryPlayAudio);
+  window.addEventListener('touchstart', tryPlayAudio);
+</script>
+
+</body>
+</html>
